@@ -1,0 +1,43 @@
+import sys, pygame
+
+pygame.init()
+white=(255,255,255)
+size = width, height = 800, 600
+speed = [20,0]
+black = 0, 0, 0
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("my game")
+clock=pygame.time.Clock()
+ballimg = pygame.image.load("ball.png")
+ballrect = ballimg.get_rect()
+def car(x,y):
+   #screen.blit(ballimg,ballrect)
+   screen.blit(ballimg,(x,y))
+
+def game_loop() :
+   car_xdist=width * 0.45
+   car_ydist=height *0.8
+   #crashed=False
+   game_exit=False
+   while not game_exit:
+      for event in pygame.event.get():
+         if event.type==pygame.QUIT:
+            game_exit=False
+            sys.exit()
+         
+         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+               x_change =5
+            if event.key == pygame.K_RIGHT:
+               x_change =-5
+         
+         if event.type == pygame.KEYUP:
+            x_change =0
+         #print(event)
+      screen.fill(white)
+      car(car_xdist,car_ydist)
+      pygame.display.update() #if no parameter mentioned in paranthesis then it displays entire surface other wise it will update that specific paramater
+      clock.tick(60)
+
+game_loop()
+
